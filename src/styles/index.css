@@ -1,0 +1,339 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap");
+
+/* =========================================================
+   BASE LAYER: Theme Variables (Light & Dark)
+   ========================================================= */
+@layer base {
+  :root {
+    /* Light mode base (Premium) */
+   --background: 215 60% 97%; /* Light blue tone */
+  --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 191 85% 41%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 14 100% 71%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214 32% 90%;
+    --input: 214 32% 90%;
+    --ring: 191 85% 41%;
+    --radius: 0.75rem;
+
+    /* Healpers brand colors */
+    --healpers-teal: 191 85% 41%;
+    --healpers-teal-light: 191 75% 55%;
+    --healpers-teal-dark: 195 100% 18%;
+    --healpers-coral: 14 100% 71%;
+    --healpers-coral-light: 14 100% 80%;
+
+    /* Glass effects */
+    --glass-bg: 0 0% 100% / 0.08;
+    --glass-border: 0 0% 100% / 0.2;
+    --glass-shadow: 0 0% 0% / 0.1;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(14 100% 71%) 0%,
+      hsl(191 85% 41%) 100%
+    );
+    --gradient-glow: radial-gradient(
+      circle at 90% 10%,
+      hsl(var(--healpers-coral) / 0.35) 0%,
+      hsl(var(--healpers-teal) / 0.05) 50%,
+      transparent 70%
+    );
+
+    /* 🌤️ Premium Light Background Gradient */
+     --gradient-premium-light: linear-gradient(
+    145deg,
+    hsl(220 65% 97%) 0%,  /* Soft light blue */
+    hsl(215 60% 98%) 35%, /* Mid calm blue */
+    hsl(210 55% 96%) 100%
+    );
+  }
+
+  .dark {
+    --background: 195 100% 18%;
+    --foreground: 0 0% 100%;
+
+    --card: 195 100% 18%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 195 100% 18%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 191 85% 41%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 195 85% 25%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 195 85% 25%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 14 100% 71%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 195 85% 25%;
+    --input: 195 85% 25%;
+    --ring: 191 75% 55%;
+
+    --glass-bg: 0 0% 100% / 0.1;
+    --glass-border: 0 0% 100% / 0.25;
+    --glass-shadow: 0 0% 0% / 0.3;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background:
+      var(--gradient-premium-light),
+      radial-gradient(
+        circle at 90% 10%,
+        hsl(191 85% 95%) 0%,
+        hsl(195 60% 97%) 40%,
+        hsl(195 75% 99%) 100%
+      );
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .dark body {
+    background:
+      var(--gradient-glow),
+      linear-gradient(
+        135deg,
+        hsl(195 100% 15%) 0%,
+        hsl(195 90% 20%) 50%,
+        hsl(195 100% 15%) 100%
+      );
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+
+
+/* =========================================================
+   COMPONENTS LAYER
+   ========================================================= */
+@layer components {
+  /* Glass Button Variants */
+  .btn-glass {
+    @apply relative px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ease-out;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glass-bg)) 0%,
+      hsl(var(--glass-bg)) 100%
+    );
+    border: 1.5px solid hsl(var(--glass-border));
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px hsl(var(--glass-shadow));
+  }
+
+  .btn-glass:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 8px 24px hsl(var(--glass-shadow));
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glass-bg)) 0%,
+      hsl(0 0% 100% / 0.15) 100%
+    );
+  }
+
+  .btn-glass-primary {
+    @apply btn-glass bg-primary text-primary-foreground border-primary;
+  }
+
+  .btn-glass-accent {
+    @apply btn-glass bg-accent text-accent-foreground border-accent;
+  }
+
+  .dark .btn-glass {
+    @apply text-white;
+  }
+
+  :not(.dark) .btn-glass {
+    @apply text-foreground;
+    border-color: hsl(var(--border));
+  }
+
+  /* Glass Cards */
+  .card-glass {
+    @apply rounded-2xl border backdrop-blur-xl;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glass-bg)) 0%,
+      hsl(0 0% 100% / 0.05) 100%
+    );
+    border: 1.5px solid hsl(var(--glass-border));
+    box-shadow:
+      0 8px 32px hsl(var(--glass-shadow)),
+      inset 0 1px 0 hsl(0 0% 100% / 0.1);
+  }
+
+  .card-glass:hover {
+    transition: transform 0.3s ease;
+    @apply scale-[1.00];
+  }
+
+  /* Text Gradients */
+  .text-gradient-hero {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      90deg,
+      hsl(var(--healpers-coral)) 0%,
+      hsl(var(--healpers-teal)) 100%
+    );
+  }
+
+  .text-gradient-neon {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--healpers-teal)) 0%,
+      hsl(var(--healpers-coral)) 100%
+    );
+  }
+
+  /* Neon Glass Cards */
+  .glass-card-neon {
+    @apply card-glass;
+    box-shadow:
+      0 8px 32px hsl(var(--glass-shadow)),
+      inset 0 1px 0 hsl(0 0% 100% / 0.1),
+      0 0 40px hsl(var(--healpers-teal) / 0.1);
+  }
+
+  .glass-card-neon:hover {
+    box-shadow:
+      0 12px 48px hsl(var(--glass-shadow)),
+      inset 0 1px 0 hsl(0 0% 100% / 0.15),
+      0 0 60px hsl(var(--healpers-teal) / 0.2);
+  }
+
+  .glass-card-category {
+    @apply card-glass relative overflow-hidden transition-all duration-500 ease-in-out;
+  }
+
+  .glass-card-helper {
+    @apply card-glass transition-all duration-300 ease-in-out;
+  }
+
+  .glass-card-helper:hover {
+    @apply scale-[1.02];
+    box-shadow:
+      0 12px 48px hsl(var(--glass-shadow)),
+      0 0 60px hsl(var(--healpers-teal) / 0.15);
+  }
+
+  /* Small Glass Button */
+  .glass-button-small {
+    @apply px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ease-in-out;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glass-bg)) 0%,
+      hsl(var(--glass-bg)) 100%
+    );
+    border: 1.5px solid hsl(var(--glass-border));
+    backdrop-filter: blur(10px);
+  }
+
+  .glass-button-small:hover {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glass-bg)) 0%,
+      hsl(0 0% 100% / 0.15) 100%
+    );
+    box-shadow: 0 4px 16px hsl(var(--glass-shadow));
+  }
+
+  /* Neon Borders & Shadows */
+  .neon-border-active {
+    border-color: hsl(var(--healpers-teal));
+    box-shadow:
+      0 0 20px hsl(var(--healpers-teal) / 0.5),
+      0 0 40px hsl(var(--healpers-coral) / 0.3),
+      inset 0 0 20px hsl(var(--healpers-teal) / 0.1);
+  }
+
+  .shadow-neon-glow {
+    box-shadow:
+      0 8px 32px hsl(var(--glass-shadow)),
+      0 0 40px hsl(var(--healpers-teal) / 0.3),
+      0 0 60px hsl(var(--healpers-coral) / 0.2);
+  }
+
+  .shadow-neon-glow-strong {
+    box-shadow:
+      0 12px 48px hsl(var(--glass-shadow)),
+      0 0 60px hsl(var(--healpers-teal) / 0.5),
+      0 0 80px hsl(var(--healpers-coral) / 0.3);
+  }
+
+  .drop-shadow-neon {
+    filter: drop-shadow(0 0 8px hsl(var(--healpers-teal) / 0.6));
+  }
+
+  /* ====== Live Tracking Screen Components ====== */
+  .price-container-bg {
+    @apply bg-secondary/30 rounded-xl p-4 flex justify-between items-center;
+    border: 1px solid hsl(var(--healpers-teal) / 0.4);
+    box-shadow: 0 0 10px hsl(var(--healpers-teal) / 0.1);
+  }
+
+  .map-placeholder-style {
+    background-color: #1a2832;
+    @apply h-full w-full flex items-center justify-center text-white/50 text-lg;
+    border-bottom: 3px solid hsl(var(--healpers-teal) / 0.5);
+  }
+
+  .task-item-done {
+    @apply flex items-center space-x-3 p-3 rounded-xl text-sm font-medium text-white/90;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--healpers-teal) / 0.1) 0%,
+      hsl(var(--glass-bg)) 100%
+    );
+    border: 1px solid hsl(var(--healpers-teal) / 0.4);
+  }
+
+  .task-item-in-progress {
+    @apply flex items-center space-x-3 p-3 rounded-xl text-sm font-medium text-white/90;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--healpers-coral) / 0.1) 0%,
+      hsl(var(--glass-bg)) 100%
+    );
+    border: 1px solid hsl(var(--healpers-coral) / 0.4);
+  }
+}
